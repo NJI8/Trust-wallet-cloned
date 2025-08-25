@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trust Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            color: #222;
+            background: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            background: #fff;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1A38F3;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 18px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #222;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: #1A38F3;
+        }
+        
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .icon-btn {
+            background: transparent;
+            border: 1px solid #1A38F3;
+            border-radius: 24px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            color: #1A38F3;
+            cursor: pointer;
+            /*transition: background 0.2s; */
+        }
+        
+        .icon-btn:hover {
+            background: #F3F6FF;
+        }
+        
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        
+        .download-btn {
+            background: #1A38F3;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            font-size: 1rem;
+            padding: 7px 26px;
+            font-weight: 700;
+            cursor: pointer;
+            /*transition: background 0.2s;*/
+        }
+        
+        .download-btn:hover {
+            background: #0016a2;
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: #1A38F3;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            gap: 40px;
+        }
+        
+        .hero-left, .hero-right {
+            flex: 1;
+        }
+        
+        .hero-left h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero-left p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 28px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .cta {
+            display: flex;
+            align-items: center;
+            border: 2px solid #1A38F3;
+            border-radius: 32px;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #1A38F3;
+            font-weight: 500;
+            font-size: 1rem;
+            background: #fff;
+           /* transition: background 0.2s, color 0.2s;*/
+            gap: 8px;
+        }
+        
+        .cta:hover {
+            background: #F3F6FF;
+            color: #0016a2;
+        }
+        
+        .cta-icon {
+            font-size: 1.5rem;
+        }
+        
+        .cta-text b {
+            color: #222;
+            font-weight: 700;
+        }
+        
+        .hero-right img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 24px;
+        }
+        
+        /* Features Bar */
+        .features-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .feature {
+            font-size: 1.1rem;
+            text-align: center;
+            min-width: 150px;
+            flex: 1;
+        }
+        
+        .feature .blue {
+            color: #1A38F3;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+     
+        .trust-section {
+            background: #0000ff;
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0;
+            color: #fff;
+        }
+        
+        .trust-content {
+            flex: 1;
+            padding-right: 30px;
+        }
+        
+        .trust-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .trust-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .trust-btn {
+            display: inline-block;
+            background: #fff;
+            color: #0000ff;
+            font-size: 1rem;
+            padding: 14px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .trust-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .trust-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .trust-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .wallet-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .wallet-left, .wallet-right {
+            flex: 1;
+            border-radius: 30px;
+            padding: 40px;
+        }
+        
+        .wallet-left {
+            background: #f7f7fa;
+            border: 1.5px solid #e4e4ed;
+        }
+        
+        .wallet-left h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        
+        .wallet-left p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #222;
+        }
+        
+        .wallet-switch {
+            display: flex;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+        
+        .switch-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 30px;
+            border: 2px solid #222;
+            border-radius: 25px;
+            background: #fff;
+            color: #222;
+            margin-right: -2px;
+            cursor: pointer;
+            /*transition: background 0.2s, color 0.2s; */
+            outline: none;
+        }
+        
+        .switch-btn.active {
+            background: #0000ff;
+            color: #fff;
+            border-color: #0000ff;
+            z-index: 1;
+        }
+        
+        .wallet-download-btn {
+            display: inline-block;
+            background: #0000ff;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 16px;
+            /* transition: background 0.2s; */
+        }
+        
+        .wallet-download-btn:hover {
+            background: #0016a2;
+        }
+        
+        .wallet-right {
+            background: #181818;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .wallet-right video {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 20px;
+        }
+        
+        .trust-footer {
+            background: #f7f7fa;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-logo {
+            width: 120px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0000ff;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links-section {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-column {
+            min-width: 150px;
+        }
+        
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #222;
+        }
+        
+        .footer-column a {
+            display: block;
+            text-decoration: none;
+            color: #222;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+        
+        .footer-column a:hover {
+            color: #0000ff;
+            text-decoration: underline;
+        }
+        
+        .footer-cert {
+            text-align: center;
+        }
+        
+        .footer-cert-img {
+            width: 70px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-download {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-download-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-download-desc {
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .footer-download-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-download-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #fff;
+            color: #0000ff;
+            font-weight: 500;
+            border: 2px solid #0000ff;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+           /* transition: background 0.2s, color 0.2s; */
+        }
+        
+        .footer-download-btn:hover {
+            background: #0000ff;
+            color: #fff;
+        }
+        
+        .footer-social-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-social-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 15px;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            color: #fff;
+            border-radius: 7px;
+            width: 38px;
+            height: 38px;
+            font-size: 1.2rem;
+            text-decoration: none;
+          /*  transition: background 0.23s; */
+        }
+        
+        .footer-social-links a:hover {
+            background: #0000ff;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-left h1 {
+                font-size: 2.2rem;
+            }
+            
+            .trust-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .wallet-left h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .trust-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .trust-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .wallet-section {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                z-index: 100;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .navbar-actions {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .feature {
+                margin-bottom: 10px;
+            }
+            
+            .footer-main {
+                flex-direction: column;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .footer-download-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .hero-left h1 {
+                font-size: 2rem;
+            }
+            
+            .cta {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-left h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .trust-content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .wallet-left h2 {
+                font-size: 1.6rem;
+            }
+            
+            .wallet-switch {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .switch-btn {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .footer-links-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        #devBtn{
+            background: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            color: blue;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #navLinks a{
+            padding: 12px;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0,.3);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="/resources/trust.png" alt="Trust Logo" />
+                </div>
+                
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <nav class="nav-links" id="navLinks">
+                    <a href="wallet.html" id="walletLink">Wallet</a>
+                    <a href="#">Features</a>
+                    <a href="#">Build</a>
+                    <a href="#">Support</a>
+                    <a href="#">About</a>
+                </nav>
+                
+                <div class="navbar-actions">
+                    <button class="icon-btn lang-btn">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <button class="download-btn">Download</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-left">
+                    <h1>True crypto ownership.<br>Powerful Web3 experiences</h1>
+                    <p>Unlock the power of your cryptocurrency assets and explore the world of Web3 with Trust Wallet.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta">
+                            <span class="cta-icon"><i class="fab fa-apple"></i></span>
+                            <span class="cta-text">Download on <b>App Store</b></span>
+                        </a>
+                        <a href="#" class="cta">
+                            <span class="cta-icon"><i class="fab fa-google-play"></i></span>
+                            <span class="cta-text">Download on <b>Google Play</b></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <img src="/resources/ilustration.png" alt="Crypto Wallet Illustration" />
+                </div>
+            </section>
+            
+            <section class="features-bar">
+                <div class="feature">
+                    Trusted by <br><span class="blue">200M</span> people
+                </div>
+                <div class="feature">
+                    Founded in <br><span class="blue">2017</span>
+                </div>
+                <div class="feature">
+                    Independently <br><span class="blue">Audited</span>
+                </div>
+                <div class="feature">
+                    ISO <br><span class="blue">Certified</span>
+                </div>
+                <div class="feature">
+                    Top reviews <br><span class="blue">★★★★★</span>
+                </div>
+            </section>
+        </div>
+        
+        <div class="container">
+            <div class="trust-section">
+                <div class="trust-content">
+                    <h2>Building on Trust</h2>
+                    <p>
+                        We know that working together as a community is better for everyone. Our platform enables blockchain developers to build their dApps and wallets natively and connect with millions of users, without having to worry about the low-level implementation details.
+                    </p>
+                    <a href="C:\Users\DELL\OneDrive\Desktop\trust wallet clone\index.html">
+                        <button id="devBtn">Check out our Developer Docs</button>
+                      </a>
+                </div>
+            
+                <div class="trust-image">
+                    <img src="/resources/helmet.png" alt="Trust Helmet Illustration">
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="wallet-section">
+                <div class="wallet-left">
+                    <h2>Your one-stop, Web3 wallet</h2>
+                    <p>
+                        Buy, sell, and swap crypto, earn rewards, manage NFTs, and discover DApps, all in one place.
+                    </p>
+                    <div class="wallet-switch">
+                        <button class="switch-btn active" style="border: none;">Mobile</button>
+                        &nbsp &nbsp
+                        <button class="switch-btn" style="border:1px solid #ccc; box-shadow:0px 0px 12px rgba(0, 0,0, 0.3)">Extension</button>
+                    </div>
+                    <a href="#" class="wallet-download-btn">Download Mobile App</a>
+                </div>
+                <div class="wallet-right">
+                    <video controls loop autoplay muted>
+                        <source src="/resources/div video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="trust-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo-section">
+                    <img src="/resources/helmet.png" alt="Trust Shield Logo" class="footer-logo" style="border-radius: 12px;">
+                </div>
+                
+                <div class="footer-links-section">
+                    <div class="footer-column">
+                        <div class="footer-title">Wallet</div>
+                        <a href="#">Mobile App</a>
+                        <a href="#">Browser Extension</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <div class="footer-title">Features</div>
+                        <a href="#">Buy Crypto</a>
+                        <a href="#">Swaps</a>
+                        <a href="#">Staking</a>
+                        <a href="#">NFTs</a>
+                        <a href="#">Security</a>
+                        <a href="#">SWIFT: Smart Contract Wallet</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <div class="footer-title">Build</div>
+                        <a href="#">Developer Docs</a>
+                        <a href="#">Wallet Core</a>
+                        <a href="#">Submit dApp</a>
+                        <a href="#">Get assets listed</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <div class="footer-title">Support</div>
+                        <a href="#">FAQ</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <div class="footer-title">About</div>
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press Kit</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Notice</a>
+                        <a href="#">Cookie Preferences</a>
+                        <a href="#">Cookie Notice</a>
+                        <a href="#">Blog</a>
+                    </div>
+                    
+                    <div class="footer-column footer-cert">
+                        <img src="/resources/iso-cert-.png" alt="ISO 27001 Certification" class="footer-cert-img">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-download">
+                    <div class="footer-download-title">Download Trust Wallet</div>
+                    <div class="footer-download-desc">The most trusted & secure crypto wallet.</div>
+                    <div class="footer-download-btns">
+                        <a href="#" class="footer-download-btn">
+                            <i class="fab fa-apple"></i> App Store
+                        </a>
+                        <a href="#" class="footer-download-btn">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-social-section">
+                    <div class="footer-social-title">Follow Us</div>
+                    <div class="footer-social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-reddit"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (!menuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        const walletLink = document.getElementById("walletLink");
+
+        walletLink.addEventListener('click', ()=>{
+            window.location.href = 'wallet.html';
+        })
+    </script>
+</body>
+</html>
